@@ -31,8 +31,10 @@ public class Main {
 	public static HashMap<String, Integer> variables = new HashMap<String, Integer>();
 
     public static void main(String[] args){
-	// String s = "x=1;y=x*2;z=x-y;x=y+z";
-	Vector<Instruction> x = Parser.parse(FileToString("src/prog1"));
+	//String s = "x=4;x=x+1;y=x+x;z=x*y";
+	String s = FileToString("src/prog1").replace(System.getProperty("line.separator"), ";").replace(" ", "");
+	System.out.println(s);
+	Vector<Instruction> x = Parser.parse(s);
 	solvePro(x);
 	//For each variable in the HashMap, print the variable name and its value
 		System.out.println("Valeurs des variables à la fin du programme:");
