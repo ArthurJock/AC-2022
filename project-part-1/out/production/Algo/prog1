@@ -1,4 +1,4 @@
-x = 4
-x = x + 1
-y = x + x
-z = x * y
+x = 1
+w = 4
+y = x - x
+x = y * w
