@@ -8,7 +8,7 @@ class Entier extends Value {
 
     @Override
     public String toString(){
-	return "Entier " +  x.toString();
+	return x.toString();
     }
 
     public int getValue() {

@@ -7,7 +7,7 @@ class Variable extends Value{
     }
     @Override
     public String toString(){
-	return "Variable " + var;
+	return var;
     }
 
     public int getValue() {

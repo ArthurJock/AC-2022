@@ -7,4 +7,8 @@ class Assign extends Instruction{
 	lhs = s;
 	rhs = x;
     }
+
+    public String toString(){
+        return this.lhs+" = "+this.rhs;
+    }
 }

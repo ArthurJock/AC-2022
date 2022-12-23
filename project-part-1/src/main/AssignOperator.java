@@ -11,4 +11,8 @@ class AssignOperator extends Instruction{
 	t0 = x;
 	t1 = y;
     }
+
+    public String toString(){
+        return this.lhs+" = "+this.t0+" "+this.op+" "+this.t1;
+    }
 }

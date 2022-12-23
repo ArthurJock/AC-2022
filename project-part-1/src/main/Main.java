@@ -34,14 +34,18 @@ public class Main {
     public static void main(String[] args){
 		//String s = "x=4;x=x+1;y=x+x;z=x*y";
 		String s = FileToString("src/prog1").replace(System.getProperty("line.separator"), ";").replace(" ", "");
-		System.out.println(s);
+		System.out.println("Programme initial :\n");
 		Vector<Instruction> x = Parser.parse(s);
 		simplifiedPro(x);
-		//For each variable in the HashMap, print the variable name and its value
-			System.out.println("Valeurs des variables à la fin du programme:");
-		for (String key : variables.keySet()) {
-			System.out.println("La variable " + key + " a pour valeur " + variables.get(key));
+		System.out.println("Programme simplifié :\n");
+		for (Instruction i: simplified) {
+			System.out.println(i);
 		}
+		//For each variable in the HashMap, print the variable name and its value
+			//System.out.println("Valeurs des variables à la fin du programme:");
+		/**for (String key : variables.keySet()) {
+			System.out.println("La variable " + key + " a pour valeur " + variables.get(key));
+		}*/
     }
 
 	public static void solvePro(Vector<Instruction> x) {
@@ -108,7 +112,6 @@ public class Main {
 			System.out.println(i);
 			if (i instanceof Assign) {
 				Assign a = (Assign) i;
-				System.out.println("La variable " + a.lhs + " reçoit la valeur " + a.rhs);
 				//a.lhs = Nom de la variable
 				//a.lsh = Valeur de la variable (Entier ou Variable)
 				if (a.rhs instanceof Entier) {
@@ -124,7 +127,6 @@ public class Main {
 			}
 			else{
 				AssignOperator a = (AssignOperator) i;
-				System.out.println("On effectue l'opération " + a.op + " aux valeurs " + a.t0  + " et " + a.t1 + " et on stocke le résultat dans " + a.lhs);
 				if (a.t0 instanceof Entier && a.t1 instanceof Entier) {
 					Entier e0 = (Entier) a.t0;
 					Entier e1 = (Entier) a.t1;
