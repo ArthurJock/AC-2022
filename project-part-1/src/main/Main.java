@@ -135,12 +135,15 @@ public class Main {
 							variables.put(a.lhs, e0.getValue() + e1.getValue());
 							//simplifaction du 0+0
 							if(e0.getValue() == 0 && e1.getValue()==0) simplified.add(new Assign(a.lhs, new Entier(0)));
+							else if(e0.getValue() == 0) simplified.add(new Assign(a.lhs, e1));
+							else if(e1.getValue() == 0) simplified.add(new Assign(a.lhs, e0));
 							else simplified.add(new AssignOperator(a.lhs, "+", e0, e1));
 						}
 						case "-" -> {
 							variables.put(a.lhs, e0.getValue() - e1.getValue());
 							//simplification du 1-1
 							if(e0.getValue() == 1 && e1.getValue()==1) simplified.add(new Assign(a.lhs, new Entier(0)));
+							else if(e1.getValue() == 0) simplified.add(new Assign(a.lhs, e0));
 							else simplified.add(new AssignOperator(a.lhs, "-", e0, e1));
 						}
 						case "*" -> {
@@ -161,7 +164,8 @@ public class Main {
 					switch (a.op) {
 						case "+" -> {
 							variables.put(a.lhs, e0.getValue() + variables.get(v1.var));
-							simplified.add(new AssignOperator(a.lhs, "+", e0, v1));
+							if(e0.getValue() == 0) simplified.add(new Assign(a.lhs, v1));
+							else simplified.add(new AssignOperator(a.lhs, "+", e0, v1));
 						}
 						case "-" -> {
 							variables.put(a.lhs, e0.getValue() - variables.get(v1.var));
@@ -189,14 +193,15 @@ public class Main {
 					switch (a.op) {
 						case "+" -> {
 							variables.put(a.lhs, variables.get(v0.var) + e1.getValue());
-							simplified.add(new AssignOperator(a.lhs, "+", new Variable(v0.var), e1));
+							if(e1.getValue() == 0) simplified.add(new Assign(a.lhs, v0));
+							else simplified.add(new AssignOperator(a.lhs, "+", v0, e1));
 						}
 						case "-" -> {
 							variables.put(a.lhs, variables.get(v0.var) - e1.getValue());
 							//simplification du x - 1 avec x = 1
 							if(e1.getValue() == 1 && variables.get(v0.var) == 1) simplified.add(new Assign(a.lhs, new Entier(0)));
 							//simplification du x - 0
-							else if(e1.getValue() == 0) simplified.add(new Assign(a.lhs, new Entier(e1.getValue())));
+							else if(e1.getValue() == 0) simplified.add(new Assign(a.lhs, e1));
 							else simplified.add(new AssignOperator(a.lhs, "-", v0, e1));
 						}
 						case "*" -> {
