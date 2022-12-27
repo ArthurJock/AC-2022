@@ -14,4 +14,7 @@ class Entier extends Value {
     public int getValue() {
         return x;
     }
+    public void setX(int x) {
+        this.x = x;
+    }
 }
