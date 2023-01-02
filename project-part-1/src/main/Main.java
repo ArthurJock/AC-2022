@@ -32,12 +32,22 @@ public class Main {
         //String s = "x=4;x=x+1;y=x+x;z=x*y";
         String s = FileToString("src/prog1").replace(System.getProperty("line.separator"), ";").replace(" ", "");
         String s2 = FileToString("src/prog2").replace(System.getProperty("line.separator"), ";").replace(" ", "");
+        String s3 = FileToString("src/prog3").replace(System.getProperty("line.separator"), ";").replace(" ", "");
         System.out.println("Programme initial 1 :");
         Vector<Instruction> x = Parser.parse(s);
         System.out.println(s + "\n");
         System.out.println("Programme initial 2 :");
         Vector<Instruction> y = Parser.parse(s2);
         System.out.println(s2 + "\n");
+        System.out.println("Programme initial 3 :");
+        Vector<Instruction> v = Parser.parse(s3);
+        System.out.println(s2 + "\n");
+        solvePro(v);
+        simplifiedPro(v);
+        System.out.println("Programme simplifié 3 :");
+        for(Instruction i : simplified){
+            System.out.println(i);
+        }
         int randomPrime = RandomPrime.randomPrime();
         System.out.println("Nombre premier aléatoire : " + randomPrime + "\n");
         if (areProgEqual(x, y, randomPrime)) {
